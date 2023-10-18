@@ -21,9 +21,9 @@ object Utils {
   def readCoefficients(bitWidth: Int): Seq[SInt] = {
   try {
     val filePath = "in/coefficients.csv"
-    val file_in = Source.fromFile(filePath)
-    val coefficients = file_in.getLines().next().split(",").map(_.trim.toInt)
-    file_in.close()
+    val inFile = Source.fromFile(filePath)
+    val coefficients = inFile.getLines().next().split(",").map(_.trim.toInt)
+    inFile.close()
 
     val coefficientsSInt = coefficients.map(coeff => (coeff).toLong.S(bitWidth.W))
     coefficientsSInt
