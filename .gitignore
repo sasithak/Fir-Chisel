@@ -344,3 +344,6 @@ hs_err_pid*
 .metals/
 .bloop/
 
+# I/O
+in/
+out/
