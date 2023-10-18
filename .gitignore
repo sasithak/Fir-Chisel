@@ -342,4 +342,5 @@ hs_err_pid*
 # VS Code
 .vscode/
 .metals/
+.bloop/
 
