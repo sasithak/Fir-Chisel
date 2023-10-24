@@ -9,27 +9,27 @@ import firrtl.annotations.DeletedAnnotation
 import scala.io.Source
 
 object Utils {
-  def emitVerilog(gen: => RawModule): String =
+  def emitVerilog(gen: => RawModule, outdir: String): String =
     (new ChiselStage)
-      .emitVerilog(gen, Array("--target-dir", "out/verilog/"))
+      .emitVerilog(gen, Array("--target-dir", "out/verilog/" + outdir + "/"))
 
 
-  def emitFirrtl(gen: => RawModule): String =
+  def emitFirrtl(gen: => RawModule, outdir: String): String =
     (new ChiselStage)
-      .emitFirrtl(gen, Array("--target-dir", "out/firrtl/"))
+      .emitFirrtl(gen, Array("--target-dir", "out/firrtl/" + outdir + "/"))
 
-  def readCoefficients(bitWidth: Int): Seq[SInt] = {
-  try {
-    val filePath = "in/coefficients.csv"
-    val inFile = Source.fromFile(filePath)
-    val coefficients = inFile.getLines().next().split(",").map(_.trim.toInt)
-    inFile.close()
+  def readCoefficients(bitWidth: Int, filename: String): Seq[SInt] = {
+    try {
+      val filePath = "in/" + filename
+      val inFile = Source.fromFile(filePath)
+      val coefficients = inFile.getLines().next().split(",").map(_.trim.toInt)
+      inFile.close()
 
-    val coefficientsSInt = coefficients.map(coeff => (coeff).toLong.S(bitWidth.W))
-    coefficientsSInt
-  } catch {
-    case e: Exception =>
-      Seq.empty[SInt]
+      val coefficientsSInt = coefficients.map(coeff => (coeff).toLong.S(bitWidth.W))
+      coefficientsSInt
+    } catch {
+      case e: Exception =>
+        Seq.empty[SInt]
+    }
   }
-}
 }
