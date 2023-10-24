@@ -347,3 +347,13 @@ hs_err_pid*
 # I/O
 in/
 out/
+
+# report
+report/report.aux
+report/report.log
+report/report.fls
+report/report.fdb_latexmk
+report/report.out
+report/report.synctex.gz
+report/report.toc
+report/report.pdf
